@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/pavel-alpinweb/portfolio-express/issues"
   },
-  "homepage": "https://github.com/pavel-alpinweb/portfolio-express#readme"
+  "homepage": "https://github.com/pavel-alpinweb/portfolio-express#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
