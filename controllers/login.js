@@ -1,3 +1,3 @@
 module.exports.get = function(req, res) {
-  res.render("pages/login", { title: "Main" });
+  res.render("pages/login", { title: "login" });
 };
