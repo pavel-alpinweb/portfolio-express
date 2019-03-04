@@ -1,10 +1,29 @@
 const path = require("path");
 const express = require("express");
+const bodyParser = require("body-parser");
+const session = require("express-session");
 const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(
+  session({
+    secret: "loftschool",
+    key: "sessionkey",
+    cookie: {
+      path: "/",
+      httpOnly: true,
+      maxAge: 10 * 60 * 1000
+    },
+    saveUninitialized: false,
+    resave: false
+  })
+);
 
 app.use(express.static(path.join(__dirname, "public")));
 

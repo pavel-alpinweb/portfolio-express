@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/pavel-alpinweb/portfolio-express#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "pug": "^2.0.3"
   }
 }
