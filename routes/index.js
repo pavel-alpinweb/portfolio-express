@@ -53,6 +53,18 @@ router.post("/admin/skills", (req, res) => {
   res.redirect("/#life");
 });
 
+router.post("/admin/upload", (req, res) => {
+  const { photo, name, price } = req.body;
+  db.get("works")
+    .push({
+      src: "./img/products/Work1.jpg",
+      name: name,
+      price: price
+    })
+    .write();
+  res.redirect("/#product");
+});
+
 router.get("/", ctrlHome.get);
 
 router.get("/login", ctrlLogin.get);
