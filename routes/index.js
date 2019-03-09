@@ -18,7 +18,7 @@ const ctrlHome = require("../controllers/home");
 const ctrlLogin = require("../controllers/login");
 const ctrlAdmin = require("../controllers/admin");
 
-router.post("/", (req, res, next) => {
+router.post("/", (req, res) => {
   const { email, password } = req.body;
   const user = db.getState().user;
   if (user.login === email && psw.validPassword(password)) {
@@ -28,6 +28,29 @@ router.post("/", (req, res, next) => {
     req.session.isAdmin = false;
     res.redirect("/login");
   }
+});
+
+router.post("/admin/skills", (req, res) => {
+  const { age, concerts, cities, years } = req.body;
+  db.set("skills", [
+    {
+      number: age,
+      text: "Возраст начала занятий на скрипке"
+    },
+    {
+      number: concerts,
+      text: "Концертов отыграл"
+    },
+    {
+      number: cities,
+      text: "Максимальное число городов в туре"
+    },
+    {
+      number: years,
+      text: "Лет на сцене в качестве скрипача"
+    }
+  ]).write();
+  res.redirect("/#life");
 });
 
 router.get("/", ctrlHome.get);
