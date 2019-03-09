@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const express = require("express");
 const router = express.Router();
 const db = require("../models/db");
@@ -30,40 +32,9 @@ router.post("/", (req, res) => {
   }
 });
 
-router.post("/admin/skills", (req, res) => {
-  const { age, concerts, cities, years } = req.body;
-  db.set("skills", [
-    {
-      number: age,
-      text: "Возраст начала занятий на скрипке"
-    },
-    {
-      number: concerts,
-      text: "Концертов отыграл"
-    },
-    {
-      number: cities,
-      text: "Максимальное число городов в туре"
-    },
-    {
-      number: years,
-      text: "Лет на сцене в качестве скрипача"
-    }
-  ]).write();
-  res.redirect("/#life");
-});
+router.post("/admin/skills", ctrlAdmin.skills);
 
-router.post("/admin/upload", (req, res) => {
-  const { photo, name, price } = req.body;
-  db.get("works")
-    .push({
-      src: "./img/products/Work1.jpg",
-      name: name,
-      price: price
-    })
-    .write();
-  res.redirect("/#product");
-});
+router.post("/admin/upload", ctrlAdmin.upload);
 
 router.get("/", ctrlHome.get);
 
