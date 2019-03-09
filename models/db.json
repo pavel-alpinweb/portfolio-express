@@ -49,6 +49,16 @@
       "src": "./upload/IMG-20190102-WA0003.jpg",
       "name": "Имя",
       "price": "6000"
+    },
+    {
+      "src": "./upload/IMG-20181209-WA0013.jpg",
+      "name": "Имя",
+      "price": "3000"
+    },
+    {
+      "src": "./upload/IMG-20181203-WA0004.jpg",
+      "name": "Имя",
+      "price": "1000"
     }
   ],
   "skills": [
