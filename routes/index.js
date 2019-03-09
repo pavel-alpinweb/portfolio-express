@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const db = require("../models/db");
+const psw = require("../libs/password");
 
 const isAdmin = (req, res, next) => {
   // если в сессии текущего пользователя есть пометка о том, что он является
@@ -17,9 +19,15 @@ const ctrlLogin = require("../controllers/login");
 const ctrlAdmin = require("../controllers/admin");
 
 router.post("/", (req, res, next) => {
-  req.session.isAdmin = true;
-  console.log(req.body);
-  res.redirect("/admin");
+  const { email, password } = req.body;
+  const user = db.getState().user;
+  if (user.login === email && psw.validPassword(password)) {
+    req.session.isAdmin = true;
+    res.redirect("/admin");
+  } else {
+    req.session.isAdmin = false;
+    res.redirect("/login");
+  }
 });
 
 router.get("/", ctrlHome.get);
