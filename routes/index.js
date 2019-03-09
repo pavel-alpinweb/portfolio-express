@@ -18,7 +18,7 @@ const ctrlHome = require("../controllers/home");
 const ctrlLogin = require("../controllers/login");
 const ctrlAdmin = require("../controllers/admin");
 
-router.post("/", (req, res) => {
+router.post("/login/admin", (req, res) => {
   const { email, password } = req.body;
   const user = db.getState().user;
   if (user.login === email && psw.validPassword(password)) {
