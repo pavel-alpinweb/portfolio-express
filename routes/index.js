@@ -18,6 +18,7 @@ const ctrlAdmin = require("../controllers/admin");
 
 router.post("/", (req, res, next) => {
   req.session.isAdmin = true;
+  console.log(req.body);
   res.redirect("/admin");
 });
 
