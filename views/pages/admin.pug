@@ -13,6 +13,8 @@ block content
       .container.admin-content__container
         .form-container
           form.form-skill(action='/admin/skills' method="POST")
+            if (msgSkills)
+              .status= msgSkills
             .form-title Счетчики
             if (msgskill)
               .status= msgskill
@@ -31,9 +33,9 @@ block content
             .form__btns.form-skill__input-line
               button(type="submit").button Сохранить
           form.form-upload(action='/admin/upload' method="POST" enctype="multipart/form-data")
-            .form-title Добавить товар
             if (msgfile)
               .status= msgfile
+            .form-title Добавить товар
             .form-upload__input-line
               .form-upload__wraper
                 label.form-upload__label

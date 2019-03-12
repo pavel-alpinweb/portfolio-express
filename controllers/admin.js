@@ -38,7 +38,7 @@ module.exports.upload = function(req, res, next) {
           price: fields.price
         })
         .write();
-      res.redirect("/#product");
+      res.render("pages/admin", { title: "admin", msgfile: "Все огонь!" });
     });
   });
 };
@@ -63,5 +63,5 @@ module.exports.skills = function(req, res) {
       text: "Лет на сцене в качестве скрипача"
     }
   ]).write();
-  res.redirect("/#life");
+  res.render("pages/admin", { title: "admin", msgSkills: "Все огонь!" });
 };
