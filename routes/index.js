@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../models/db");
-const psw = require("../libs/password");
 
 const ctrlHome = require("../controllers/home");
 const ctrlLogin = require("../controllers/login");
@@ -18,17 +16,7 @@ const isAdmin = (req, res, next) => {
   res.render("pages/login", { title: "login" });
 };
 
-router.post("/login/admin", (req, res) => {
-  const { email, password } = req.body;
-  const user = db.getState().user;
-  if (user.login === email && psw.validPassword(password)) {
-    req.session.isAdmin = true;
-    res.redirect("/admin");
-  } else {
-    req.session.isAdmin = false;
-    res.redirect("/login");
-  }
-});
+router.post("/login/admin", ctrlLogin.enter);
 
 router.post("/admin/skills", ctrlAdmin.skills);
 
