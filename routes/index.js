@@ -8,6 +8,10 @@ const config = require("../config.json");
 const works = db.getState().works || [];
 const skills = db.getState().skills || [];
 
+const ctrlHome = require("../controllers/home");
+const ctrlLogin = require("../controllers/login");
+const ctrlAdmin = require("../controllers/admin");
+
 const isAdmin = (req, res, next) => {
   // если в сессии текущего пользователя есть пометка о том, что он является
   // администратором
@@ -16,12 +20,8 @@ const isAdmin = (req, res, next) => {
     return next();
   }
   // если нет, то перебросить пользователя на главную страницу сайта
-  res.redirect("/login");
+  res.render("pages/login", { title: "login" });
 };
-
-const ctrlHome = require("../controllers/home");
-const ctrlLogin = require("../controllers/login");
-const ctrlAdmin = require("../controllers/admin");
 
 router.post("/login/admin", (req, res) => {
   const { email, password } = req.body;
@@ -41,7 +41,7 @@ router.post("/admin/upload", ctrlAdmin.upload);
 
 router.get("/", ctrlHome.get);
 
-router.get("/login", ctrlLogin.get);
+router.get("/login", isAdmin, ctrlAdmin.get);
 router.get("/admin", isAdmin, ctrlAdmin.get);
 
 router.post("/", (req, res, next) => {
