@@ -16,7 +16,7 @@ const isAdmin = (req, res, next) => {
     return next();
   }
   // если нет, то перебросить пользователя на главную страницу сайта
-  res.redirect("/");
+  res.redirect("/login");
 };
 
 const ctrlHome = require("../controllers/home");
