@@ -18,6 +18,7 @@
   "homepage": "https://github.com/pavel-alpinweb/portfolio-express#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
     "crypto": "^1.0.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",

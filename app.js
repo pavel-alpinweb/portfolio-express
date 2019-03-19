@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const flash = require("connect-flash");
 const app = express();
 
 // view engine setup
@@ -24,6 +25,8 @@ app.use(
     resave: false
   })
 );
+
+app.use(flash());
 
 app.use(express.static(path.join(__dirname, "public")));
 

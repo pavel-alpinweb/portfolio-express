@@ -4,7 +4,11 @@ const config = require("../config.json");
 const works = db.getState().works || [];
 const skills = db.getState().skills || [];
 module.exports.get = function(req, res) {
-  res.render("pages/index", { products: works, skills: skills });
+  res.render("pages/index", {
+    products: works,
+    skills: skills,
+    msg: req.flash("info")
+  });
 };
 
 module.exports.postMail = function(req, res) {
@@ -27,16 +31,22 @@ module.exports.postMail = function(req, res) {
   transporter.sendMail(mailOptions, function(error, info) {
     // если есть ошибки при отправке - сообщаем об этом
     if (error) {
-      return res.render("pages/index", {
-        products: works,
-        skills: skills,
-        msg: `При отправке письма произошла ошибка!: ${error}`
-      });
+      // return res.render("pages/index", {
+      //   products: works,
+      //   skills: skills,
+      //   // msg: `При отправке письма произошла ошибка!: ${error}`
+      //   msg: flash("info", `При отправке письма произошла ошибка!: ${error}`)
+      // });
+      req.flash("info", `При отправке письма произошла ошибка!: ${error}`);
+      return res.redirect("/#status");
     }
-    res.render("pages/index", {
-      products: works,
-      skills: skills,
-      msg: `Письмо успешно отправлено: ${error}`
-    });
+    // res.render("pages/index", {
+    //   products: works,
+    //   skills: skills,
+    //   // msg: `Письмо успешно отправлено: ${error}`
+    //   msg: flash("info", `Письмо успешно отправлено: ${error}`)
+    // });
+    req.flash("info", `Письмо успешно отправлено!`);
+    res.redirect("/#status");
   });
 };
